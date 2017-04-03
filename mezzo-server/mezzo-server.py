@@ -5,6 +5,7 @@ import logging
 import datetime
 import tornado.web
 import tornado.ioloop
+import tornado.options
 import random
 
 DEBUG = True
@@ -12,12 +13,12 @@ DIRNAME = os.path.dirname(os.path.abspath(__file__))
 
 STATIC_PATH = os.path.join(DIRNAME, 'static')
 TEMPLATE_PATH = os.path.join(DIRNAME, 'template')
-print DIRNAME
-print STATIC_PATH
-print TEMPLATE_PATH
+# print DIRNAME
+# print STATIC_PATH
+# print TEMPLATE_PATH
 
 settings = {
-    'debug': True,
+    'debug': DEBUG,
     'template_path': TEMPLATE_PATH,
     'static_path': STATIC_PATH
     }
@@ -31,7 +32,7 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self):
     	# this is the recurring "show current status" req
     	# poll device-disabled-statuses and return properly-formatted template
-        print STATIC_PATH
+        logging.debug('we are in the MainHandler GET function')
         devices = [{'dev':'alexa','devType':'speechTranscript', 'timeTillReactivate':200},
         {'dev':'echo','devType':'audioRecord', 'timeTillReactivate':200},
         {'dev':'dropcam','devType':'camera', 'timeTillReactivate':200}]
@@ -41,6 +42,7 @@ class MainHandler(tornado.web.RequestHandler):
     def post(self):
     	# this is the "update device-disabled list" req
     	# look at payload and alter device-disabled-status list as needed
+        logging.debug('we are in the MainHandler POST function')
         self.write("I AM MEZZO\rYOU ARE MINE")
 
 application = tornado.web.Application([
@@ -54,5 +56,6 @@ application = tornado.web.Application([
 
 
 if __name__ == "__main__":
+    tornado.options.parse_command_line()
     application.listen(8888)
     tornado.ioloop.IOLoop.current().start()
