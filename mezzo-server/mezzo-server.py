@@ -33,9 +33,10 @@ class MainHandler(tornado.web.RequestHandler):
     	# this is the recurring "show current status" req
     	# poll device-disabled-statuses and return properly-formatted template
         logging.debug('we are in the MainHandler GET function')
-        devices = [{'dev':'alexa','devType':'speechTranscript', 'timeTillReactivate':200},
-        {'dev':'echo','devType':'audioRecord', 'timeTillReactivate':200},
-        {'dev':'dropcam','devType':'camera', 'timeTillReactivate':200}]
+        devices = [{'dev':'alexa','function':['speechTranscription111','3rd-party cloud'],'loc':'kitchen', 'timeTillReactivate':200},
+        {'dev':'echo','function':['audioRecord22','3rd-party-cloud'], 'loc':'livingRoom', 'timeTillReactivate':200},
+        {'dev':'dropcam','function':['camera11','audioRecord'], 'loc':'livingRoom', 'timeTillReactivate':200}]
+        logging.debug(devices)
         loader = tornado.template.Loader('templates')
         self.write(loader.load('swipeTemplate.html').generate(devices=devices))
 

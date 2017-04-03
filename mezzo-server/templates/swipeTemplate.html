@@ -77,17 +77,18 @@
         	{% for d in devices %}
         	<li>
                 <a href="#demo-mail">
-                    <h3>ALEXA</h3>
-                    <p class="topic"><strong>Kitchen</strong></p>
-                    <p>Active transcription</p>
-                    <p>Voice data to 3rd party cloud service</p>
-                    <p class="ui-li-aside"><strong>4:48</strong>PM</p>
+                    <h3>{{d['dev']}}</h3>
+                    <p class="topic"><strong>{{d['loc']}}</strong></p>
+                    {% for f in d['function'] %}
+                    <p>{{f}}</p>
+                    {% end for %}
+                    <p class="ui-li-aside"><strong>{{d['timeTillReactivate']}}</strong> mins left</p>
                 </a>
                 <a href="#" class="delete">Delete</a>
             </li>
-				<strong>{{d}}</strong>
+				<!-- <strong>{{d}}</strong> -->
 			{% end for %}
-            <li>
+            <!-- <li>
                 <a href="#demo-mail">
                     <h3>ALEXA</h3>
                     <p class="topic"><strong>Kitchen</strong></p>
@@ -213,7 +214,7 @@
                     <p class="ui-li-aside"><strong>9:18</strong>AM</p>
                 </a>
                 <a href="#" class="delete">Delete</a>
-            </li>
+            </li> -->
         </ul>
 
     </div><!-- /content -->
